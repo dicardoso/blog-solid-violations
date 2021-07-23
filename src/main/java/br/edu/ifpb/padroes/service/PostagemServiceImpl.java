@@ -12,7 +12,7 @@ public class PostagemServiceImpl implements PostagemService {
 
     @Override
     public void adicionarPostagem(Postagem postagem) {
-        postagemDAO.addPostagemPublica(postagem)
+        postagemDAO.addPostagem(postagem)
     }
 
     @Override
