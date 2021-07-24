@@ -1,4 +1,4 @@
-package br.edu.ifpb.padroes.service;
+package br.edu.ifpb.padroes.dao;
 
 import br.edu.ifpb.padroes.modelo.Usuario;
 
@@ -6,15 +6,15 @@ import java.sql.*;
 import java.util.List;
 import java.util.logging.Logger;
 
-public class UsuarioDAO {
+public class UsuarioSqlLite extends UsuarioDAO{
+    private DAOConfig daoConfig;
 
-    private String arquivoBanco;
-    public UsuarioDAO(String arquivoBanco) {
-        this.arquivoBanco = arquivoBanco;
+    public UsuarioSqlLite(String arquivoBanco){
+        this.daoConfig = new DAOConfig(arquivoBanco);
     }
 
     private Connection connect() {
-        try (Connection connection = DriverManager.getConnection("jdbc:sqlite:"+this.arquivoBanco)) {
+        try (Connection connection = this.daoConfig.openConnection()) {
             Statement statement = connection.createStatement();
 
             //Criando tabela de usuários
@@ -41,7 +41,6 @@ public class UsuarioDAO {
         }
         return null;
     }
-
     public void addUsuario(Usuario usuario) {
         Connection conexao = connect();
         try (PreparedStatement stmt = conexao.prepareStatement("INSERT INTO USUARIO( ID, NOME, LOGIN, SENHA) VALUES (?, ?, ?, ?)")) {
@@ -72,10 +71,4 @@ public class UsuarioDAO {
         this.trataExcecao(new Exception("Não implementado ainda"));
         return null;
     }
-
-    public void trataExcecao(Exception ex) {
-        Logger.getLogger(UsuarioServiceImpl.class.getName()).warning(ex.getMessage());
-    }
-
-
 }
