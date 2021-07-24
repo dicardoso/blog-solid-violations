@@ -1,6 +1,6 @@
 package br.edu.ifpb.padroes.modelo;
 
-public enum Tipo {
+public enum TipoPostagem {
     PUBLICA,
     PRIVADA,
 } 
