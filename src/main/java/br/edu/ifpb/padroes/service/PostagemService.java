@@ -2,7 +2,7 @@ package br.edu.ifpb.padroes.service;
 
 import br.edu.ifpb.padroes.modelo.Postagem;
 
-public interface UsuarioService {
+public interface PostagemService {
 
     void adicionarPostagem(Postagem postagem);
     void removerPostagem(Postagem postagem);
